@@ -1,0 +1,26 @@
+USE [DWWarehouse]
+GO
+/****** Object:  StoredProcedure [dbo].[azp_JBHInvoiceDetailDelete]    Script Date: 03/04/2015 12:23:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- ===================================================================================================
+-- Author:		Wood, Fred
+-- Create date: 02/26/15
+-- Description:	The purpose of this Stored Procedure is to delete all records
+--              from JBH Invoice Detail to purge records existing on the daily load file. 
+-- ===================================================================================================
+CREATE PROCEDURE [dbo].[azp_JBHInvoiceDetailDelete] 
+AS
+
+BEGIN
+DELETE A
+      
+FROM [dbo].[JBHInvoiceDetail] AS A
+INNER JOIN [pload].[JBHInvoiceDetail] AS B ON A.TPLInvNo = B.TPLInvNo AND A.BOL = B.BOL 
+                                          AND A.SO = B.SO AND A.Item = B.Item 
+                                          AND A.ChargeType = B.ChargeType 
+                                        
+END
+Enter file contents here
