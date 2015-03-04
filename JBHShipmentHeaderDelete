@@ -1,0 +1,23 @@
+USE [DWWarehouse]
+GO
+/****** Object:  StoredProcedure [dbo].[azp_JBHShipmentHeaderDelete]    Script Date: 03/04/2015 13:03:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- ===================================================================================================
+-- Author:		Wood, Fred
+-- Create date: 02/26/15
+-- Description:	The purpose of this Stored Procedure is to delete all records
+--              from JBH Shipment Header to purge records existing on the daily load file. 
+-- ===================================================================================================
+ALTER PROCEDURE [dbo].[azp_JBHShipmentHeaderDelete] 
+AS
+
+BEGIN
+DELETE A
+      
+FROM [dbo].[JBHShipmentHeader] AS A
+INNER JOIN [pload].[JBHShipmentHeader] AS B ON A.MBOL = B.MBOL AND A.BOL = B.BOL AND A.SO = B.SO 
+                                           
+END
