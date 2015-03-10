@@ -1,0 +1,23 @@
+USE [DWWarehouse]
+GO
+/****** Object:  StoredProcedure [dbo].[azp_CustomerMasterDelete]    Script Date: 03/10/2015 09:32:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- ===================================================================================================
+-- Author:		Wood, Fred
+-- Create date: 02/26/15
+-- Description:	The purpose of this Stored Procedure is to delete all records
+--              from Customer Master to purge records existing on the daily load file. 
+-- ===================================================================================================
+CREATE PROCEDURE [dbo].[azp_CustomerMasterDelete] 
+AS
+
+BEGIN
+DELETE A
+      
+FROM [dbo].[CustomerMaster] AS A
+INNER JOIN [pload].[CustomerMaster] AS B ON A.CorpID = B.CorpID 
+
+END
