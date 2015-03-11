@@ -1,0 +1,24 @@
+USE [DWWarehouse]
+GO
+/****** Object:  StoredProcedure [dbo].[azp_InvoicingMasterDelete]    Script Date: 03/11/2015 09:46:11 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- ===================================================================================================
+-- Author:		Wood, Fred
+-- Create date: 02/26/15
+-- Description:	The purpose of this Stored Procedure is to delete all records
+--              from Invoicing Master to purge records existing on the daily load file. 
+-- ===================================================================================================
+CREATE PROCEDURE [dbo].[azp_InvoicingMasterDelete] 
+AS
+
+BEGIN
+DELETE A
+      
+FROM [dbo].[InvoicingMaster] AS A
+INNER JOIN [pload].[InvoicingMaster] AS B ON A.InvNo = B.InvNo AND A.InvLineNo = B.InvLineNo 
+                                         AND A.LegInvLineNo = B.LegInvLineNo
+
+END
