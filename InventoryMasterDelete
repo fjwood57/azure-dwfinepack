@@ -1,0 +1,24 @@
+USE [DWWarehouse]
+GO
+/****** Object:  StoredProcedure [dbo].[azp_InventoryMasterDelete]    Script Date: 03/11/2015 09:42:49 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- ===================================================================================================
+-- Author:		Wood, Fred
+-- Create date: 02/26/15
+-- Description:	The purpose of this Stored Procedure is to delete all records
+--              from Inventory Master to purge records existing on the daily load file. 
+-- ===================================================================================================
+CREATE PROCEDURE [dbo].[azp_InventoryMasterDelete] 
+AS
+
+BEGIN
+DELETE A
+      
+FROM [dbo].[InventoryMaster] AS A
+INNER JOIN [pload].[InventoryMaster] AS B ON A.Item = B.Item AND A.ItemType = B.ItemType 
+                                         AND A.SourceDB = B.SourceDB AND A.Facility = B.Facility
+
+END
